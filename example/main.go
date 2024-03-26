@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"log"
-	
+
 	"github.com/fairytale5571/go-whitepay"
 )
 
