@@ -6,9 +6,10 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/fairytale5571/go-whitepay/pkg/api"
+	"github.com/fairytale5571/go-whitepay/internal/api"
 )
 
+// CreateNewOrderRequest body for CreateNewOrder
 type CreateNewOrderRequest struct {
 	// Amount Min value depends on currency. Becomes required in case if “currency“ was specified.
 	Amount string `json:"amount"`
@@ -26,6 +27,7 @@ type CreateNewOrderRequest struct {
 	FailureLink string `json:"failure_link"`
 }
 
+// CreateNewOrderResponse body for CreateNewOrder
 type CreateNewOrderResponse struct {
 	Order `json:"order"`
 }
@@ -47,6 +49,7 @@ func (wp *WhitePay) CreateNewOrder(ctx context.Context, req *CreateNewOrderReque
 	return &resp, nil
 }
 
+// GetCryptoOrderDetailsResponse body for GetCryptoOrderDetails
 type GetCryptoOrderDetailsResponse struct {
 	Order `json:"order"`
 }
@@ -67,6 +70,7 @@ func (wp *WhitePay) ShowCryptoOrderDetails(ctx context.Context, orderID string) 
 	return &resp, nil
 }
 
+// ShowCryptoOrdersListResponse body for ShowCryptoOrdersList
 type ShowCryptoOrdersListResponse struct {
 	Orders []*Order   `json:"orders"`
 	Meta   Pagination `json:"meta"`
@@ -125,6 +129,7 @@ func (wp *WhitePay) ShowInvoiceCurrenciesForCryptoOrderCreation(ctx context.Cont
 	return &resp, nil
 }
 
+// CompleteCryptoOrderResponse body for CompleteCryptoOrder
 type CompleteCryptoOrderResponse struct {
 	Order `json:"order"`
 }

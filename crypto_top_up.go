@@ -3,14 +3,17 @@ package whitepay
 import (
 	"context"
 	"fmt"
-	"github.com/fairytale5571/go-whitepay/pkg/api"
 	"net/http"
+
+	"github.com/fairytale5571/go-whitepay/internal/api"
 )
 
+// CreateCryptoTopUpRequest body for CreateCryptoTopUp
 type CreateCryptoTopUpRequest struct {
 	CreateNewOrderRequest
 }
 
+// CreateCryptoTopUpResponse response for CreateCryptoTopUp
 type CreateCryptoTopUpResponse struct {
 	Order `json:"order"`
 }

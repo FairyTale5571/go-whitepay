@@ -3,9 +3,10 @@ package whitepay
 import (
 	"context"
 	"fmt"
-	"github.com/fairytale5571/go-whitepay/pkg/api"
 	"net/http"
 	"net/url"
+
+	"github.com/fairytale5571/go-whitepay/internal/api"
 )
 
 type ShorOrderDetailsResponse struct {

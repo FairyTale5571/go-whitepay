@@ -3,8 +3,9 @@ package whitepay
 import (
 	"context"
 	"fmt"
-	"github.com/fairytale5571/go-whitepay/pkg/api"
 	"net/http"
+
+	"github.com/fairytale5571/go-whitepay/internal/api"
 )
 
 type CreateNewFiatOrder struct {

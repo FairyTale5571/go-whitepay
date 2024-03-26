@@ -57,8 +57,8 @@ type Order struct {
 	// CompletedAt 	order completion date
 	CompletedAt time.Time `json:"completed_at"`
 
-	// AcquiringUrl	unique payment form url. Should be used to redirect website customer to the payment form.
-	AcquiringUrl string `json:"acquiring_url"`
+	// AcquiringURL	unique payment form url. Should be used to redirect website customer to the payment form.
+	AcquiringURL string `json:"acquiring_url"`
 
 	// SuccessfulLink Link used to redirect user from payment form after order completion. Has to be URL
 	SuccessfulLink string `json:"successful_link"`
@@ -91,6 +91,7 @@ type Transaction struct {
 	StockOrders []*StockOrder `json:"stock_orders,omitempty"`
 }
 
+// InvoiceCurrencies represents a WhitePay invoice currency.
 type InvoiceCurrencies struct {
 	// ID 	currency identifier
 	ID string `json:"id"`
@@ -110,6 +111,7 @@ type InvoiceCurrencies struct {
 	Icon string `json:"icon"`
 }
 
+// Currency represents a WhitePay currency.
 type Currency struct {
 	// ID 	currency identifier
 	ID string `json:"id"`
@@ -124,17 +126,20 @@ type Currency struct {
 	Value string `json:"value"`
 }
 
+// Status represents a WhitePay status.
 type Status struct {
 	ID    string `json:"id"`
 	Label string `json:"label"`
 }
 
+// Balance represents a WhitePay balance.
 type Balance struct {
-	Id       string   `json:"id"`
+	ID       string   `json:"id"`
 	Value    string   `json:"value"`
 	Currency Currency `json:"currency"`
 }
 
+// StockOrder represents a WhitePay stock order.
 type StockOrder struct {
 	Amount       string `json:"amount"`
 	Status       string `json:"status"`
@@ -143,4 +148,32 @@ type StockOrder struct {
 	Time         string `json:"time"`
 	ExchangeRate string `json:"exchange_rate"`
 	CreatedAt    string `json:"created_at"`
+}
+
+type CoinLimit struct {
+	Min string `json:"min"`
+	Max string `json:"max"`
+}
+
+type Network struct {
+	MinAmount string      `json:"min_amount"`
+	MaxAmount string      `json:"max_amount"`
+	Fixed     string      `json:"fixed"`
+	Flex      interface{} `json:"flex"`
+}
+
+type CryptoCurrency struct {
+	ID                   string               `json:"id"`
+	Precision            int                  `json:"precision"`
+	Icon                 string               `json:"icon"`
+	Ticker               string               `json:"ticker"`
+	IsFiat               bool                 `json:"is_fiat"`
+	Limits               map[string]CoinLimit `json:"limits"`
+	Min                  string               `json:"min"`
+	Max                  string               `json:"max"`
+	IsStable             bool                 `json:"is_stable"`
+	Name                 string               `json:"name"`
+	Networks             map[string]Network   `json:"networks"`
+	ExchangeRate         string               `json:"exchange_rate"`
+	PresetDonationValues []interface{}        `json:"preset_donation_values"`
 }

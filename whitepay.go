@@ -1,8 +1,9 @@
 package whitepay
 
 import (
-	"github.com/fairytale5571/go-whitepay/pkg/api"
 	"net/http"
+
+	"github.com/fairytale5571/go-whitepay/internal/api"
 )
 
 const BaseURL = "https://api.whitepay.com"

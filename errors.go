@@ -3,7 +3,8 @@ package whitepay
 import (
 	"encoding/json"
 	"errors"
-	"github.com/fairytale5571/go-whitepay/pkg/api"
+
+	"github.com/fairytale5571/go-whitepay/internal/api"
 )
 
 // ErrorBody represents an error response body.
