@@ -9,7 +9,8 @@ import (
 
 // ErrorBody represents an error response body.
 type ErrorBody struct {
-	Message string `json:"message"`
+	Message string              `json:"message"`
+	Errors  map[string][]string `json:"errors,omitempty"`
 }
 
 func (e ErrorBody) Error() string {

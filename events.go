@@ -7,8 +7,7 @@ import (
 	"encoding/json"
 )
 
-// https://docs.whitepay.com/docs/webhooks/events#webhooks-settings
-
+// EventType https://docs.whitepay.com/docs/webhooks/events#webhooks-settings
 type EventType string
 
 const (
@@ -27,9 +26,10 @@ const (
 	EventTransactionWasFinalExchange EventType = "transaction::was_final_exchange"
 )
 
-type EventTransaction struct {
-	Transaction `json:"transaction"`
-	EventType   `json:"event_type"`
+type Events struct {
+	Transaction *Transaction `json:"transaction,omitempty"`
+	Order       *Order       `json:"order,omitempty"`
+	EventType   EventType    `json:"event_type"`
 }
 
 func (wp *WhitePay) SignEvent(event any) string {

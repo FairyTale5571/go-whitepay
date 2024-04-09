@@ -1,7 +1,5 @@
 package whitepay
 
-import "time"
-
 type Pagination struct {
 	PerPage  int `json:"per_page"`
 	LastPage int `json:"last_page"`
@@ -20,7 +18,7 @@ type Order struct {
 	// Currency invoice currency (ticker)
 	Currency string `json:"currency"`
 
-	// OrderNumber 	unique 9-digit numeric order identifier in Whitepay CRM system.
+	// OrderNumber 	unique 9-digit numeric order identifier in WhitePay CRM system.
 	OrderNumber string `json:"order_number"`
 
 	// Value (numeric)	invoice currency amount
@@ -52,10 +50,10 @@ type Order struct {
 	ExternalOrderID string `json:"external_order_id"`
 
 	// CreatedAt 	order creation date
-	CreatedAt time.Time `json:"created_at"`
+	CreatedAt string `json:"created_at"`
 
 	// CompletedAt 	order completion date
-	CompletedAt time.Time `json:"completed_at"`
+	CompletedAt string `json:"completed_at"`
 
 	// AcquiringURL	unique payment form url. Should be used to redirect website customer to the payment form.
 	AcquiringURL string `json:"acquiring_url"`
@@ -84,9 +82,9 @@ type Transaction struct {
 	// IsInternal 	identifies whether payment was made via WhiteBIT platform or not where true = WhiteBIT platform payment and false = any other platform.
 	IsInternal bool `json:"is_internal"`
 	// CreatedAt 	transaction creation date
-	CreatedAt time.Time `json:"created_at"`
+	CreatedAt string `json:"created_at"`
 	// CompletedAt 	transaction completion date
-	CompletedAt time.Time `json:"completed_at"`
+	CompletedAt string `json:"completed_at"`
 	// StockOrders 	stock orders
 	StockOrders []*StockOrder `json:"stock_orders,omitempty"`
 }
