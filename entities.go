@@ -44,7 +44,7 @@ type Order struct {
 	ReceivedCurrency string `json:"received_currency"`
 
 	// Status 	order status label
-	Status string `json:"status"`
+	Status Status `json:"status"`
 
 	// ExternalOrderID external order identifier
 	ExternalOrderID string `json:"external_order_id"`
@@ -76,7 +76,7 @@ type Transaction struct {
 	// Value 	transaction amount
 	Value string `json:"value"`
 	// Status 	transaction status label
-	Status string `json:"status"`
+	Status Status `json:"status"`
 	// Hash transaction hash
 	Hash string `json:"hash"`
 	// IsInternal 	identifies whether payment was made via WhiteBIT platform or not where true = WhiteBIT platform payment and false = any other platform.
@@ -124,8 +124,8 @@ type Currency struct {
 	Value string `json:"value"`
 }
 
-// Status represents a WhitePay status.
-type Status struct {
+// StatusObject represents a WhitePay status.
+type StatusObject struct {
 	ID    string `json:"id"`
 	Label string `json:"label"`
 }
@@ -140,7 +140,7 @@ type Balance struct {
 // StockOrder represents a WhitePay stock order.
 type StockOrder struct {
 	Amount       string `json:"amount"`
-	Status       string `json:"status"`
+	Status       Status `json:"status"`
 	Pair         string `json:"pair"`
 	Date         string `json:"date"`
 	Time         string `json:"time"`

@@ -9,13 +9,13 @@ import (
 	"github.com/fairytale5571/go-whitepay/internal/api"
 )
 
-type ShorOrderDetailsResponse struct {
+type ShowOrderDetailsResponse struct {
 	Order `json:"order"`
 }
 
 // ShowOrderDetails Show Order Details
-func (wp *WhitePay) ShowOrderDetails(ctx context.Context, orderID string) (*ShorOrderDetailsResponse, error) {
-	var resp ShorOrderDetailsResponse
+func (wp *WhitePay) ShowOrderDetails(ctx context.Context, orderID string) (*ShowOrderDetailsResponse, error) {
+	var resp ShowOrderDetailsResponse
 	if err := wp.client.SendRequest(ctx, api.Request{
 		Method: http.MethodGet,
 		Path:   fmt.Sprintf("/private-api/orders/%s/%s", wp.slug, orderID),
@@ -68,7 +68,7 @@ func (wp *WhitePay) ShowOrdersList(ctx context.Context, filters ...Filters) (*Sh
 }
 
 type OrderStatusesListResponse struct {
-	Statuses []*Status `json:"statuses"`
+	OrderStatuses []*StatusObject `json:"order_statuses"`
 }
 
 // ShowOrderStatusesList Get Show Statuses List
