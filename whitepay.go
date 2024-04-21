@@ -56,21 +56,37 @@ func (wp *WhitePay) WebhookHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		body, errReadBody := io.ReadAll(r.Body)
 		if errReadBody != nil {
-			log.Printf("error read request body, %s", errReadBody.Error())
+			log.Printf("[WHITEPAY]: error read request body, %s", errReadBody.Error())
 			return
 		}
+
+		signature := r.Header.Get("Signature")
 
 		update := &Events{}
 		errDecode := json.Unmarshal(body, update)
 		if errDecode != nil {
-			log.Printf("error decode request body, %s, %s", body, errDecode.Error())
+			log.Printf("[WHITEPAY]: error decode request body, %s, %s", body, errDecode.Error())
 			return
+		}
+
+		if signature != "" {
+			var compareSignature string
+			switch {
+			case update.Order != nil && wp.slugSignatureToken != "":
+				compareSignature = wp.SignOrder(body)
+			case update.Transaction != nil && wp.merchantSignatureToken != "":
+				compareSignature = wp.SignTransaction(body)
+			}
+			if signature != compareSignature {
+				log.Printf("[WHITEPAY]: error signature mismatch")
+				return
+			}
 		}
 
 		select {
 		case wp.updates <- update:
 		default:
-			log.Printf("error send update to processing, channel is full")
+			log.Printf("[WHITEPAY]: error send update to processing, channel is full")
 		}
 	}
 }

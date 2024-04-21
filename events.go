@@ -4,7 +4,6 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
-	"encoding/json"
 )
 
 // EventType https://docs.whitepay.com/docs/webhooks/events#webhooks-settings
@@ -32,12 +31,14 @@ type Events struct {
 	EventType   EventType    `json:"event_type"`
 }
 
-func (wp *WhitePay) SignEvent(event any) string {
-	payload, err := json.Marshal(event)
-	if err != nil {
-		return ""
-	}
-	h := hmac.New(sha256.New, []byte(wp.token))
+func (wp *WhitePay) SignTransaction(payload []byte) string {
+	h := hmac.New(sha256.New, []byte(wp.merchantSignatureToken))
+	h.Write(payload)
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+func (wp *WhitePay) SignOrder(payload []byte) string {
+	h := hmac.New(sha256.New, []byte(wp.slugSignatureToken))
 	h.Write(payload)
 	return hex.EncodeToString(h.Sum(nil))
 }
